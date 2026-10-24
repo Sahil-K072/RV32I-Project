@@ -1,0 +1,35 @@
+A modified test file, original taken from Digital Design and Computer Architecture, RISC-V Edition by Harris & Harris
+
+        RISC-V Assembly         Description                     Address     Machine Code
+main:   addi x2, x0, 5          # x2 = 5                        0           00500113
+        addi x3, x0, 12         # x3 = 12                       4           00C00193
+        addi x7, x3, -9         # x7 = (12 - 9) = 3             8           FF718393
+        or x4, x7, x2           # x4 = (3 OR 5) = 7             C           0023E233
+        and x5, x3, x4          # x5 = (12 AND 7) = 4           10          0041F2B3
+        slli x5, x5, 2          # x5 = 4 << 2 = 16              14          00229293
+        beq x5, x7, part1       # shouldn't be taken            18          00728863
+        slt x4, x3, x4          # x4 = (12 < 7) = 0             1C          0041A233
+        beq x4, x0, part1       # should be taken               20          00020463
+        addi x5, x0, 2          # shouldn't execute             24          00200293
+part1:  xor x4, x7, x2          # x4 = (3 XOR 5) = 6            28          0023C233
+        add x7, x4, x5          # x7 = (6 + 16) = 22            2C          005203B3
+        slt x3, x3, x7          # x3 = (12 < 22) = 1            30          0071A1B3
+        sra x7, x7, x3          # x7 = (22 >> 1) = 11           34          4033D3B3
+        sub x7, x7, x2          # x7 = (11 - 5) = 6             38          402383B3
+        sub x2, x2, x3          # x2 = (5 - 1) = 4              3C          40310133
+        sw x7, 84(x2)           # [96] = 6                      40          04712A23
+        lw x2, 88(x0)           # x2 = [88] = 6                 44          05802103
+        addi x2, x2, -2         # x2 = (6 - 2) = 4              48          FFE10113
+        bge x4, x2, part2       # should be taken               4C          00225463
+        addi x2, x0, 1          # shouldn't execute             50          00100113
+part2:  lui x6, 1               # x6 = (1 << 12) = 4096         54          00001337
+        srl x6, x6, x2          # x6 = (4096 >> 4) = 256        58          00235333
+        sb x6, 80(x0)           # [80] = 0                      5C          04600823
+        lw x8, 80(x0)           # x8 = [80] = 0                 60          05002403
+        jal x2, end             # x2 = 0x68, should be taken    64          0080016F
+        addi x2, x0, 0          # shouldn't execute             68          00000113
+end:    add x8, x8, x6          # x8 = (256 + 0) = 256          6C          00640433
+        add x0, x0, x0          # nop                           70          00000033
+        add x0, x0, x0          # nop                           74          00000033
+        add x0, x0, x0          # nop                           78          00000033
+        beq x2, x2, 0           # infinite loop                 7C          00210063
