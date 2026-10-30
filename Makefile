@@ -20,4 +20,4 @@ exec: compile
 	./obj_dir/Vtb
 
 compile: $(files)
-	verilator --binary -j 0 --trace --timing --Wno-fatal ./test/tb.sv ./design_sources/definitions.sv ./test/tb.sv -y ./design_sources/
+	verilator --binary -j 0 --trace --timing --Wno-fatal ./test/tb.sv ./design_sources/definitions.sv -y ./design_sources/
