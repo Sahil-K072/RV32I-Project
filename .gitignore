@@ -1,1 +1,5 @@
 .vscode/
+obj_dir/
+wave.vcd
+test/obj_dir/
+test/wave.vcd

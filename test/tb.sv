@@ -17,7 +17,7 @@ module tb;
   initial begin
     $display("started");
     reset = 1;
-    $readmemh("testbench_machine_code.txt", dut.i_mem1.mem);
+    $readmemh("./test/testbench_machine_code.txt", dut.i_mem1.mem);
     $dumpfile("wave.vcd");
     $dumpvars(0, dut);
     #17ns reset = 0;

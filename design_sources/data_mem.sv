@@ -7,7 +7,7 @@ module data_mem (
     clk
 );
 
-  logic [3:0][7:0] mem[255:0];
+  logic [3:0][7:0] mem[1023:0];
 
   always_ff @(posedge clk) begin
     if(we) begin
